@@ -1,0 +1,74 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.4
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/galaxyproject/galaxy:
+      branch: dev
+      repo: https://github.com/galaxyproject/galaxy.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/galaxyproject/galaxy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-tangerine-dachshund.sh
+        container: qc.acc_chummy-malachite-gopher
+  QC.Doc:
+    repos:
+      github.com/galaxyproject/galaxy find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.muzzy-charcoal-termite.sh
+        container: qc.doc_snippy-myrtle-bat
+      github.com/galaxyproject/galaxy git:
+        commands:
+        - /usr/bin/env sh .sqa/script.tacky-myrtle-guppy.sh
+        container: qc.doc_ready-white-buffalo
+      github.com/galaxyproject/galaxy markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stinky-gamboge-corgi.sh
+        container: qc.doc_lanky-rose-leopard
+      github.com/galaxyproject/galaxy restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-bistre-javanese.sh
+        container: qc.doc_jumpy-apricot-ant
+  QC.Lic:
+    repos:
+      github.com/galaxyproject/galaxy licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sloppy-auburn-goat.sh
+        container: qc.lic_goopy-black-tzu
+  QC.Sec:
+    repos:
+      github.com/galaxyproject/galaxy bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-dandelion-hamster.sh
+        container: qc.sec_gimpy-champagne-moth
+  QC.Sty:
+    repos:
+      github.com/galaxyproject/galaxy flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.chummy-alizarin-echidna.sh
+        container: qc.sty_craggy-goldenrod-rottweiler
+      github.com/galaxyproject/galaxy hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-cinnamon-cattle.sh
+        container: qc.sty_messy-chocolate-horse
+      github.com/galaxyproject/galaxy jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-magnolia-fox.sh
+        container: qc.sty_messy-cerise-caiman
+      github.com/galaxyproject/galaxy stylelint:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-teal-cockroach.sh
+        container: qc.sty_flaky-olive-kiwi
+  QC.Ver:
+    repos:
+      github.com/galaxyproject/galaxy get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.stuffy-azure-horse.sh
+        container: qc.ver_bumpy-gold-flounder
+timeout: 1800
